@@ -79,14 +79,14 @@ describe('function booksFromModule', () => {
   });
 })
 
-describe('function booksCheeperThan', () => {
-  test('booksCheeperThan 10 devuelve 4 libros', () => {
-    const response = functions.booksCheeperThan(books, 30)
+describe('function booksCheaperThan', () => {
+test('booksCheaperThan 10 devuelve 4 libros', () => {
+    const response = functions.booksCheaperThan(books, 30)
     expect(response.length).toBe(4)
   });
   
-  test('booksCheeperThan 2 devuelve 0 libros', () => {
-    const response = functions.booksCheeperThan(books, 2)
+  test('booksCheaperThan 2 devuelve 0 libros', () => {
+    const response = functions.booksCheaperThan(books, 2)
     expect(response.length).toBe(0)
   });
 })

@@ -1,5 +1,9 @@
-import { getBookById, getBookIndexById, bookExists, booksFromUser, booksFromModule, booksCheeperThan, booksWithStatus, averagePriceOfBooks, booksOfTypeNote, booksNotSold, incrementPriceOfbooks, getUserById, getUserIndexById, getUserByNickName, getModuleByCode } from './src/functions.js';
+import { getBookById, getBookIndexById, bookExists, booksFromUser, booksFromModule, booksCheaperThan, booksWithStatus, averagePriceOfBooks, booksOfTypeNotes, booksNotSold, incrementPriceOfbooks, getUserById, getUserIndexById, getUserByNickName, getModuleByCode } from './src/functions.js';
 import data from './src/services/datos.js';
+
+const books = data.books
+const users = data.users
+const modules = data.modules
 
 document.querySelector('#app').innerHTML = `
  
@@ -13,3 +17,7 @@ try {
 } catch (error) {
   console.error(error)
 }
+
+
+
+console.log(getModuleByCode(modules,'9999'))
