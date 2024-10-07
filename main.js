@@ -1,5 +1,5 @@
-import { getBookById, getBookIndexById, bookExists, booksFromUser, booksFromModule, booksCheeperThan, booksWithStatus, averagePriceOfBooks, booksOfTypeNote, booksNotSold, incrementPriceOfbooks, getUserById, getUserIndexById, getUserByNickName, getModuleByCode } from './functions.js';
-import {data} from './datos.js';
+import { getBookById, getBookIndexById, bookExists, booksFromUser, booksFromModule, booksCheeperThan, booksWithStatus, averagePriceOfBooks, booksOfTypeNote, booksNotSold, incrementPriceOfbooks, getUserById, getUserIndexById, getUserByNickName, getModuleByCode } from './src/functions.js';
+import data from './src/services/datos.js';
 
 document.querySelector('#app').innerHTML = `
  
@@ -8,4 +8,8 @@ document.querySelector('#app').innerHTML = `
   </p>
 
 `
-
+try {
+  console.log(getBookById(data.books,'macaco'))
+} catch (error) {
+  console.error(error)
+}

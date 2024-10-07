@@ -1,4 +1,10 @@
-function getBookById() {}
+function getBookById(books, bookId) {
+    const result = books.find((book) => book.id === bookId);
+    if (result) {
+      return result;
+    }
+    throw new Error('No se encontró el libro');
+}
 
 function getBookIndexById() {}
 
