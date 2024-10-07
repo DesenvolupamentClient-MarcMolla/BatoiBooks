@@ -12,12 +12,21 @@ document.querySelector('#app').innerHTML = `
   </p>
 
 `
+
+console.log("Books:")
+console.log(books)
+
+console.log("Libros del usuario 4:")
+console.log(booksFromUser(books, 4))
+
+console.log("Libros del modulo 5021")
 try {
-  console.log(getBookById(data.books,'macaco'))
+  const modulesCode5021 = booksFromModule(books, "5021")
+
 } catch (error) {
   console.error(error)
 }
+console.log(booksWithStatus(modulesCode5021, "good"))
 
-
-
-console.log(getModuleByCode(modules,'9999'))
+console.log("Incremento del 10% en el precio de los libros")
+console.log(incrementPriceOfbooks(books, 10))
