@@ -1,32 +1,32 @@
-import { getBookById, getBookIndexById, bookExists, booksFromUser, booksFromModule, booksCheaperThan, booksWithStatus, averagePriceOfBooks, booksOfTypeNotes, booksNotSold, incrementPriceOfbooks, getUserById, getUserIndexById, getUserByNickName, getModuleByCode } from './src/functions.js';
-import data from './src/services/datos.js';
+import './style.css'
+import logoBatoi from '/logoBatoi.png'
+import data from './src/services/datos'
+import Modules from './src/model/modules.class'
+import Users from './src/model/users.class'
+import Books from './src/model/books.class'
 
-const books = data.books
-const users = data.users
-const modules = data.modules
 
 document.querySelector('#app').innerHTML = `
- 
-  <p>
-    Abre la consoloa para ver el resultado.
-  </p>
-
+  <div class="contenedor">
+    <img src="${logoBatoi}" class="logo" alt="Batoi"/>
+    <h1>BatoiBooks</h1>
+    <p>Abre la consola para ver el resutlado.</p>
+  </div>
 `
 
-console.log("Books:")
-console.log(books)
+const myModules = new Modules();
+myModules.populate(data.modules);
 
-console.log("Libros del usuario 4:")
-console.log(booksFromUser(books, 4))
+const myUsers = new Users();
+myUsers.populate(data.users);
 
-console.log("Libros del modulo 5021")
-try {
-  const modulesCode5021 = booksFromModule(books, "5021")
+const myBooks = new Books();
+myBooks.populate(data.books);
 
-} catch (error) {
-  console.error(error)
-}
-console.log(booksWithStatus(modulesCode5021, "good"))
 
-console.log("Incremento del 10% en el precio de los libros")
-console.log(incrementPriceOfbooks(books, 10))
+
+console.log(myBooks.booksFromModule("5021"));
+console.log(myBooks.booksWithStatus("new"));
+console.log(myBooks.incrementPriceOfbooks(0.1));
+
+
