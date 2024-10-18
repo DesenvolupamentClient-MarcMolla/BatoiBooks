@@ -1,6 +1,5 @@
 import "./style.css";
 import logoBatoi from "/logoBatoi.png";
-import data from "./src/services/datos";
 import Modules from "./src/model/modules.class";
 import Users from "./src/model/users.class";
 import Books from "./src/model/books.class";
@@ -13,15 +12,20 @@ document.querySelector("#app").innerHTML = `
   </div>
 `;
 
-const myModules = new Modules();
-myModules.populate(data.modules);
-
-const myUsers = new Users();
-myUsers.populate(data.users);
-
 const myBooks = new Books();
-myBooks.populate(data.books);
+myBooks.populate();
 
-console.log(myBooks.booksFromModule("5021"));
-console.log(myBooks.booksWithStatus("new"));
-console.log(myBooks.incrementPriceOfbooks(0.1));
+myBooks.addBook({
+  "id": "112",
+  "userId": 2,
+  "moduleCode": "5025",
+  "publisher": "Apunts",
+  "price": 12,
+  "pages": 25,
+  "status": "good",
+  "photo": "",
+  "comments": "",
+  "soldDate": "2023-02-01"
+})
+
+console.log(myBooks.toString());

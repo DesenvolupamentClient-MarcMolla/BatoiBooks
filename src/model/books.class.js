@@ -1,11 +1,18 @@
 import Book from "./book.class";
+import api from "../services/books.api"
 export default class Books {
   constructor() {
     this.data = [];
   }
 
-  populate(data) {
-    this.data = data.map((item) => new Book(item));
+  async populate() {
+    try{
+      const books = await api.getDBBooks();
+      this.data = books.map(book => new Book(book));
+    }catch(error){
+      console.error(error);
+    }
+    
   }
 
   addBook(book) {
@@ -16,12 +23,20 @@ export default class Books {
     book.id = lastId + 1;
     book = new Book(book);
     this.data.push(book);
+    api.addDBBook(book);
     return book;
   }
 
-  removeBook(id) {
+  async removeBook(id) {
     const index = this.data.findIndex((item) => item.id === id);
     if (index === -1) throw new Error("Book not found");
+    try{
+      const book = await api.getDBBook(id)
+    }catch(error){
+      console.log(error)
+    }
+   
+
     this.data.splice(index, 1);
   }
 
@@ -67,7 +82,7 @@ export default class Books {
     return this.data.filter((book) => book.moduleCode === moduleCode);
   }
 
-  booksCheaperThan(price) {
+  booksCheeperThan(price) {
     return this.data.filter((book) => book.price <= price);
   }
 
