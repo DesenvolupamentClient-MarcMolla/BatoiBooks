@@ -32,18 +32,27 @@ export default class Books {
     if (index === -1) throw new Error("Book not found");
     try{
       const book = await api.getDBBook(id)
+      await  api.removeDBBook(index)
     }catch(error){
       console.log(error)
     }
    
 
     this.data.splice(index, 1);
+   
   }
 
-  changeBook(book) {
+  async changeBook(book) {
     book = new Book(book);
     const index = this.data.findIndex((item) => item.id === book.id);
     if (index === -1) throw new Error("Book not found");
+
+    try{
+      await api.changeDBBook(book)
+    }catch(error){
+      console.log(error)
+    }
+
     this.data[index] = book;
     return book;
   }

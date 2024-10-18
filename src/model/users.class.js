@@ -1,13 +1,23 @@
 import User from "./user.class";
+import api from "../services/users.api"
+
 export default class Users {
   constructor() {
     this.data = [];
   }
 
-  populate(data) {
-    this.data = data.map(
-      (item) => new User(item.id, item.nick, item.email, item.password),
-    );
+  async populate() {
+    try{
+      const users = await api.getDBUsers();
+      this.data = users.map(
+        (item) => new User(item.id, item.nick, item.email, item.password),
+      );
+    }catch{
+      console.log(error)
+    }
+
+
+    
   }
 
   addUser(user) {
@@ -21,16 +31,55 @@ export default class Users {
     return user;
   }
 
-  removeUser(id) {
+  async removeUser(id) {
     const index = this.data.findIndex((item) => item.id === id);
     if (index === -1) throw new Error("User not found");
+
+    try{
+      await api.removeDBUser(index)
+    }catch(error){
+      console.log(error)
+    }
+
+
     this.data.splice(index, 1);
   }
 
-  changeUser(user) {
+  async changeUser(user) {
     user = new User(user.id, user.nick, user.email, user.password);
     const index = this.data.findIndex((item) => item.id === user.id);
     if (index === -1) throw new Error("User not found");
+
+    try{
+      await api.changeDBUser(user)
+    }catch(error){
+      console.log(error) 
+    }
+
+    this.data[index] = user;
+    return user; 
+  } 
+
+  async changeUserPassword(id, password) {
+    let user;
+    try{
+      user = await api.getDBUser(id)
+      user = new User(id, user.nick, user.email, password);
+    }catch(error){ 
+      console.log(error)
+    }
+
+    
+    const index = this.data.findIndex((item) => item.id === user.id);
+    if (index === -1) throw new Error("User not found");
+
+
+    try{
+      await api.changeDBUser(user)
+    }catch(error){ 
+      console.log(error)
+    }
+
     this.data[index] = user;
     return user;
   }

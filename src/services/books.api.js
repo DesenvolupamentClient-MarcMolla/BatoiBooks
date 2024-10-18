@@ -56,5 +56,23 @@ async function removeDBBook(id) {
     return response.json();
 }
 
-export default { getDBBooks, getDBBook, addDBBook, removeDBBook };
+async function changeDBBook(book){
+    const response = await fetch(`${SERVER}/books`, {
+        method: 'PUT',
+        body: JSON.stringify(book),
+        headers:{
+            'Content-Type': 'application/json',
+        }
+    });
+
+    if (!response.ok) {
+        throw new Error(
+            `Status: ${response.status} de la BBDD: ${response.statusText}`,
+        );
+    }
+
+    return response.json();
+}
+
+export default { getDBBooks, getDBBook, addDBBook, removeDBBook, changeDBBook };
 
