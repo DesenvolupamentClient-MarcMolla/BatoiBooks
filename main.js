@@ -13,20 +13,19 @@ document.querySelector("#app").innerHTML = `
 `;
 
 const myBooks = new Books();
-myBooks.populate();
+await myBooks.populate();
 
-myBooks.addBook({
-  "id": "112",
-  "userId": 2,
-  "moduleCode": "5025",
-  "publisher": "Apunts",
-  "price": 12,
-  "pages": 25,
-  "status": "good",
-  "photo": "",
-  "comments": "",
-  "soldDate": "2023-02-01"
-})
+const myUsers = new Users();
+await myUsers.populate();
 
-console.log(myBooks.toString());
+const myModules = new Modules();
+await myModules.populate();
+
+console.log(myBooks)
+
+
+console.log(myBooks.booksFromModule(5021))
+console.log(myBooks.booksWithStatus('new'))
+console.log(myBooks.incrementPriceOfbooks(0.1))
+
  

@@ -74,5 +74,23 @@ async function changeDBUser(user){
     return response.json();
 }
 
-export default { getDBUsers, getDBUser, addDBUser, removeDBUser, changeDBUser };
+async function changeDBUserPassword(id, newPassword) {
+    const response = await fetch(`${SERVER}/users/${id}/password`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ password: newPassword }),
+    });
+
+    if (!response.ok) {
+        throw new Error(
+            `Status: ${response.status} de la BBDD: ${response.statusText}`,
+        );
+    }
+
+    return response.json();
+}
+
+export default { getDBUsers, getDBUser, addDBUser, removeDBUser, changeDBUser, changeDBUserPassword };
 

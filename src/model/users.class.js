@@ -75,7 +75,7 @@ export default class Users {
 
 
     try{
-      await api.changeDBUser(user)
+      await api.changeUserPassword(user.id, password)
     }catch(error){ 
       console.log(error)
     }

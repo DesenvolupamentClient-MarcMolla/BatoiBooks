@@ -88,7 +88,7 @@ export default class Books {
   }
 
   booksFromModule(moduleCode) {
-    return this.data.filter((book) => book.moduleCode === moduleCode);
+    return this.data.filter((book) => book.moduleCode.toString() == moduleCode.toString());
   }
 
   booksCheeperThan(price) {
